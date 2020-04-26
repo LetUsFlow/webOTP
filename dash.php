@@ -129,13 +129,13 @@ $db = getPDOObject();
 
             <br>
             <div id="userinput">
-                <form class="form-totpinput" action="genSecretAdvanced.php" method="get" target="_blank">
+                <form class="form-totpinput" action="totp/genSecretAdvanced.php" method="get" target="_blank">
                     <input type="hidden" name="user" value="<?php echo $username ?>" required>
                     <p><label for="issuer"></label>
                         <input type="text" id="issuer" name="issuer" placeholder="Issuer" class="form-control" value="LetUsFlow webOTP" required></p>
                     <p><button class="btn btn-lg btn-success btn-block" type="submit">Generate new secret key</button></p>
                 </form>
-                <form class="form-totpinput" action="addKey.php" method="get">
+                <form class="form-totpinput" action="totp/addKey.php" method="get">
                     <label for="issuer2"></label>
                         <input type="text" id="issuer2" name="issuer" placeholder="Issuer" class="form-control" value="LetUsFlow webOTP" required>
                     <p><label for="secret"></label>
