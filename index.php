@@ -1,7 +1,7 @@
 <?php
 require "user.php";
 $data = checkUser(getPDOObject());
-if ($data["status"]) header("Location: dash.php");
+if ($data["status"]) header("Location: dash.php.old");
 
 ?>
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ if ($data["status"]) header("Location: dash.php");
         </style>
     </head>
     <body>
-        <form class="form-signin" method="post" action="dash.php">
+        <form class="form-signin" method="post" action="dash.php.old">
             <h3 class="font-weight-bold">LetUsFlow.net webOTP</h3>
             <h3 class="font-weight-normal">Please sign in</h3>
             <label for="username" class="sr-only">Username</label>

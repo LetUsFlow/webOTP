@@ -42,4 +42,4 @@ $res = $db->query("INSERT INTO totp (username, secret, issuer) VALUES ('$usernam
 
 echo ($res->rowCount() == 1) ? "success" : "error";
 
-echo "<br><br><a href='../dash.php'>Done</a>";
+echo "<br><br><a href='../dash.php.old'>Done</a>";
