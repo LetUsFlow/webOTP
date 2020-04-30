@@ -33,10 +33,9 @@ try {
 }
 
 
-$stmt = getPDO()->prepare("INSERT INTO totp (username, secret, issuer) VALUES (?, ?, ?);");
+$stmt = getPDO()->prepare("INSERT INTO keys (username, secret, issuer) VALUES (?, ?, ?);");
 $stmt->execute([$username, $secret, $issuer]);
 
 
 echo ($stmt->rowCount() == 1) ? "success" : "error";
-
 echo "<br><br><a href='../dash.php'>Done</a>";

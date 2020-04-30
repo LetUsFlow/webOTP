@@ -5,29 +5,21 @@
  * (c) Florentin Schäfer 2019
  */
 
-require "user.php";
+require "../verify.php";
 
-$data = checkUser(getPDOObject());
-if ($data["status"]) $username = $data["username"];
-else {
-    header("Location: index.php?{$data["reason"]}");
-}
+if (verify()["status"] === "success") $username = verify()["username"];
+else header("Location: ../index.php");
 
-
-
-
-$db = getPDOObject();
 
 if (!(isset($_GET["totpId"]))) {
     die("Error!");
 }
-
 $totpId = $_GET["totpId"];
 
 
-$res = $db->query("DELETE FROM totp WHERE totpId = " . $totpId);
+$stmt = getPDO()->prepare("DELETE FROM totp WHERE totpId=?");
+$stmt->execute([$totpId]);
 
 
-echo ($res->rowCount() == 1) ? "success" : "error";
-
-echo "<br><br><a href='../dash.php.old'>Done</a>";
+echo ($stmt->rowCount() == 1) ? "success" : "error";
+echo "<br><br><a href='../dash.php'>Done</a>";
