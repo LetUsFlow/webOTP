@@ -17,7 +17,7 @@ function verify() {
             }
         }
     }
-    session_destroy(); // Sicherheitshalber
+    $_SESSION = [];
     return ["status" => "error"];
 }
 

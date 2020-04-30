@@ -4,7 +4,6 @@
  * >> login.php <<
  * (c) Florentin Schäfer 2020
  */
-
 require "../verify.php";
 
 
@@ -20,6 +19,7 @@ elseif (isset($_POST["username"]) && isset($_POST["password"])) {
     $_SESSION["username"] = $res["username"];
     $_SESSION["auth"] = true;
     $_SESSION["lastlogin"] = time();
+
 
     header("Location: ../dash.php");
 }

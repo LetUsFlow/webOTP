@@ -1,5 +1,5 @@
 <?php
-require "../secret.php";
+require "../verify.php";
 
 
 
