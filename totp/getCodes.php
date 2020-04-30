@@ -5,10 +5,12 @@
  * (c) Florentin Schäfer 2019
  */
 
-require "../secret.php";
-require "../totp/TOTP.php";
+require "../verify.php";
+require "TOTP.php";
 
-$username = "florentin";
+if (verify()["status"] === "success") $username = verify()["username"];
+else header("Location: ../index.php");
+
 
 $stmt = getPDO()->prepare("SELECT totpId, secret, issuer FROM totp WHERE username=? ORDER BY totpId");
 $stmt->execute([$username]);
