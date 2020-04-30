@@ -1,10 +1,8 @@
 <?php
-
 require "verify.php";
 
-if (verify()["status"] === "success") {
+if (verify()["status"] === "success")
     header("Location: dash.php");
-}
 
 ?>
 <!DOCTYPE html>
@@ -21,7 +19,6 @@ if (verify()["status"] === "success") {
                 align-items: center;
                 padding-top: 40px;
                 padding-bottom: 40px;
-                background-color: #f5f5f5;
             }
             .form-signin {
                 text-align: center;

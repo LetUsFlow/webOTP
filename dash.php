@@ -1,10 +1,8 @@
 <?php
-
 require "verify.php";
 
-if (verify()["status"] === "error") {
-    header("Location: index.php");
-}
+if (verify()["status"] === "error") header("Location: index.php");
+$username = verify()["username"];
 
 ?>
 <!DOCTYPE html>
@@ -23,12 +21,39 @@ if (verify()["status"] === "error") {
                 height: 35pt;
                 visibility: hidden;
             }
+            header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            #issuer {
+                margin-top: -25px;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            #secret {
+                margin-top: -25px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
         </style>
     </head>
     <body>
 
 
         <div class="container">
+            <br>
+            <header>
+                <h3>Hello <?php echo $username; ?>!</h3>
+                <div>
+                    <a type="button" class="btn btn-danger" href="user/logout.php">Logout</a>
+                    <button type="button" class="btn btn-info" id="reloadPage">Reload page</button>
+                </div>
+            </header>
+            <br>
+
+
             <div id="app">
                 <table class="table">
                     <tr><th>ID</th><th>Issuer</th><th>Code</th><th>Action</th></tr>
@@ -36,11 +61,26 @@ if (verify()["status"] === "error") {
                         <td>{{ entry.id }}</td>
                         <td>{{ entry.issuer }}</td>
                         <td>{{ entry.code }}</td>
-                        <td><a :href="'removeKey.php?totpId=' + entry.id">Delete</a></td>
+                        <td><a :href="'totp/removeKey.php?totpId=' + entry.id">Delete</a></td>
                     </tr>
                 </table>
                 <p>Codes update in <span class="bold">{{ secondsToUpdate }}</span> seconds. <img id="status" src="assets/img/loading.svg" alt="status"></p>
             </div>
+
+
+
+            <form action="totp/addKey.php" method="get">
+                <p><label for="issuer"></label><input type="text" id="issuer" name="issuer" placeholder="Issuer" class="form-control" required>
+                <label for="secret"></label><input type="text" id="secret" name="secret" placeholder="Secret" class="form-control" required></p>
+                <p><button class="btn btn-lg btn-success btn-block" type="submit">Add new secret key</button></p>
+            </form>
+            <form action="totp/genSecret.php" method="get" target="_blank">
+                <p><label for="newissuer"></label><input type="text" id="newissuer" name="issuer" placeholder="Issuer" class="form-control" required></p>
+                <p><button class="btn btn-lg btn-success btn-block" type="submit">Add new secret key</button></p>
+
+            </form>
+
+
         </div>
 
 
@@ -87,6 +127,8 @@ if (verify()["status"] === "error") {
                     }
                 }
             });
+
+            $("#reloadPage").click(() => {window.location = window.location;});
         </script>
     </body>
 </html>
