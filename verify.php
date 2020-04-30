@@ -9,7 +9,7 @@
 session_start();
 
 function verify() {
-    if ($_SESSION["auth"]) { // Basically ist der Nutzer eingeloggt
+    if (isset($_SESSION["auth"]) && $_SESSION["auth"]) { // Basically ist der Nutzer eingeloggt
         if (isset($_SESSION["username"]) && isset($_SESSION["lastlogin"])) { // Prüfe, ob alle Elemete existent
             if ($_SESSION["lastlogin"]+(3600*24*30) > time()) { // Letzer Login war innerhalb des letzen Monats
                 $_SESSION["lastlogin"] = time();
