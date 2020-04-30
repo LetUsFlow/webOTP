@@ -1,12 +1,12 @@
 <?php
-/**
- * >> webOTP <<
- * >> dash.php.old <<
- * (c) Florentin Schäfer 2020
- */
+
+require "verify.php";
+
+if (verify()["status"] === "error") {
+    header("Location: index.php");
+}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,7 +15,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=2">
         <link rel="stylesheet" href="assets/css/bootstrap.css">
-
         <style>
             .bold {
                 font-weight: bold;

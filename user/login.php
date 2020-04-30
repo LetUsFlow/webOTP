@@ -5,8 +5,27 @@
  * (c) Florentin Schäfer 2020
  */
 
-require "../secret.php";
+require "../verify.php";
 
+
+if (verify()["status"] === "success") {
+    header("Location: ../dash.php");
+}
+elseif (isset($_POST["username"]) && isset($_POST["password"])) {
+    $res = login($_POST["username"], $_POST["password"]);
+
+    if ($res["status"] === "error") header("Location: ../index.php?{$res["reason"]}");
+
+    // Setze Session
+    $_SESSION["username"] = $res["username"];
+    $_SESSION["auth"] = true;
+    $_SESSION["lastlogin"] = time();
+
+    header("Location: ../dash.php");
+}
+else {
+    header("Location: ../index.php");
+}
 
 
 function login($username, $password) {

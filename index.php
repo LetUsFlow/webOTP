@@ -1,7 +1,10 @@
 <?php
-require "user.php";
-$data = checkUser(getPDOObject());
-if ($data["status"]) header("Location: dash.php.old");
+
+require "verify.php";
+
+if (verify()["status"] === "success") {
+    header("Location: dash.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -11,7 +14,7 @@ if ($data["status"]) header("Location: dash.php.old");
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=2">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
         <style>
             body {
                 display: flex;
@@ -49,7 +52,7 @@ if ($data["status"]) header("Location: dash.php.old");
         </style>
     </head>
     <body>
-        <form class="form-signin" method="post" action="dash.php.old">
+        <form class="form-signin" method="post" action="user/login.php">
             <h3 class="font-weight-bold">LetUsFlow.net webOTP</h3>
             <h3 class="font-weight-normal">Please sign in</h3>
             <label for="username" class="sr-only">Username</label>
