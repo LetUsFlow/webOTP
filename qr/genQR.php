@@ -5,7 +5,7 @@
  * (c) Florentin Schäfer 2019
  */
 
-require "TOTP.php";
+require "../totp/TOTP.php";
 require "phpqrcode.php";
 
 $secret = $_GET["secret"];
