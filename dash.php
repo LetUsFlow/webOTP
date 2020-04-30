@@ -12,7 +12,7 @@ $username = verify()["username"];
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=2">
-        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css">
         <style>
             .bold {
                 font-weight: bold;
@@ -84,8 +84,8 @@ $username = verify()["username"];
         </div>
 
 
-        <script src="assets/js/vue.js"></script>
-        <script src="assets/js/jquery-3.5.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
         <script>
             let app = new Vue({
                 el: "#app",

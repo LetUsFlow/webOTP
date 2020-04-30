@@ -12,7 +12,7 @@ if (verify()["status"] === "success")
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=2">
-        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css">
         <style>
             body {
                 display: flex;
