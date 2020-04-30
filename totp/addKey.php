@@ -5,15 +5,12 @@
  * (c) Florentin Schäfer 2019
  */
 
-require "user.php";
+require "../verify.php";
 require "TOTP.php";
 
-$data = checkUser(getPDOObject());
-if ($data["status"]) $username = $data["username"];
-else {
-    header("Location: index.php?{$data["reason"]}");
-}
-$db = getPDOObject();
+if (verify()["status"] === "success") $username = verify()["username"];
+else header("Location: ../index.php");
+$db = getPDO();
 
 if (!(isset($_GET["secret"]) && isset($_GET["issuer"]))) {
     die("Error!");
