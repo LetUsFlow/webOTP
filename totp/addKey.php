@@ -33,7 +33,7 @@ try {
 }
 
 
-$stmt = getPDO()->prepare("INSERT INTO keys (username, secret, issuer) VALUES (?, ?, ?);");
+$stmt = getPDO()->prepare("INSERT INTO webotp.keys (username, secret, issuer) VALUES (?, ?, ?);");
 $stmt->execute([$username, $secret, $issuer]);
 
 

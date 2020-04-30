@@ -12,7 +12,7 @@ if (verify()["status"] === "success") $username = verify()["username"];
 else header("Location: ../index.php");
 
 
-$stmt = getPDO()->prepare("SELECT totpId, secret, issuer FROM keys WHERE username=? ORDER BY totpId");
+$stmt = getPDO()->prepare("SELECT totpId, secret, issuer FROM webotp.keys WHERE username=? ORDER BY totpId");
 $stmt->execute([$username]);
 $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

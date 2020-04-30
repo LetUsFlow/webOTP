@@ -17,7 +17,7 @@ if (!(isset($_GET["totpId"]))) {
 $totpId = $_GET["totpId"];
 
 
-$stmt = getPDO()->prepare("DELETE FROM totp WHERE totpId=?");
+$stmt = getPDO()->prepare("DELETE FROM webotp.keys WHERE totpId=?");
 $stmt->execute([$totpId]);
 
 
