@@ -4,39 +4,42 @@
  * >> login.php <<
  * (c) Florentin Schäfer 2020
  */
+
 require "../verify.php";
 
 
-if (verify()["status"] === "success") {
+if (verify()["status"] === "success") header("Location: ../dash.php");
+elseif (isset($_POST["username"]) && isset($_POST["password"]) && trim($_POST["username"]) !== "" && trim($_POST["password"]) !== "") {
+
+    if (!checkCredentials($_POST["username"], $_POST["password"])) errorexit("credentials");
+
+    $sessiontoken = hash("sha512", openssl_random_pseudo_bytes(2056));
+
+    $stmt = getPDO()->prepare("INSERT INTO session (sessiontoken, username, useragent, lastupdatetime) VALUES (?, ?, ?, current_timestamp())");
+    $stmt->execute([$sessiontoken, checkCredentials($_POST["username"], $_POST["password"]), $_SERVER["HTTP_USER_AGENT"]]);
+
+
+    setcookie("sessiontoken", $sessiontoken, time() + 3600 * 24 * 90, "/"); // ALle 90 Tage soll sich der Nutzer anmelden müssen
+
     header("Location: ../dash.php");
 }
-elseif (isset($_POST["username"]) && isset($_POST["password"])) {
-    $res = login($_POST["username"], $_POST["password"]);
-
-    if ($res["status"] === "error") header("Location: ../index.php?{$res["reason"]}");
-
-    // Setze Session
-    $_SESSION["username"] = $res["username"];
-    $_SESSION["auth"] = true;
-    $_SESSION["lastlogin"] = time();
+else errorexit("invalid_input");
 
 
-    header("Location: ../dash.php");
-}
-else {
-    header("Location: ../index.php");
+function errorexit($errorcode) {
+    sleep(4); // limit requests / brute-force protection
+    header("Location: ../index.php?code=$errorcode");
 }
 
 
-function login($username, $password) {
-    $stmt = getPDO()->prepare("SELECT username, passwordhash FROM users WHERE username=?");
+function checkCredentials($username, $password) {
+    $stmt = getPDO()->prepare("SELECT username, passwordhash FROM `users` WHERE username=?");
     $stmt->execute([$username]);
-    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if (sizeof($res) != 1) return ["status" => "error", "reason" => "wrongdata"];
+    if ($stmt->rowCount() != 1) return false;
 
-    $user = $res[0];
-    if (!password_verify($password, base64_decode($user["passwordhash"]))) return ["status" => "error", "reason" => "wrongdata"]; // Anmeldung fehlgeschlagen
+    $res = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!password_verify($password, $res["passwordhash"])) return false;
 
-    return ["status" => "success", "username" => $user["username"]];
+    return $res["username"];
 }
