@@ -9,7 +9,8 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`
 (
     username     VARCHAR(32) NOT NULL PRIMARY KEY,
-    passwordhash TEXT        NOT NULL
+    passwordhash TEXT        NOT NULL,
+    passwordsalt TEXT        NOT NULL
 );
 
 DROP TABLE IF EXISTS `keys`;
