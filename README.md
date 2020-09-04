@@ -1,6 +1,6 @@
 # webOTP
 
-webOTP is a web-based [TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm)-Client like Google Authenticator but just in your browser.
+webOTP is a web-based [TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm)-Client like Google Authenticator but just in a browser.
 
 ## How it works
 webOTP utilizes [php-totp](https://github.com/greymich/php-totp) for the generation of the OTP-Codes and [PHP QR Code](http://phpqrcode.sourceforge.net/) for QR-Code generation.
