@@ -67,7 +67,7 @@ class TOTP
     }
 
     if ($valid_response) {
-      $NTPtime = ord($data{0})*pow(256, 3) + ord($data{1})*pow(256, 2) + ord($data{2})*256 + ord($data{3});
+      $NTPtime = ord($data[0])*pow(256, 3) + ord($data[1])*pow(256, 2) + ord($data[2])*256 + ord($data[3]);
 
       $TimeFrom1990 = $NTPtime - 2840140800;
       $TimeNow = $TimeFrom1990 + 631152000;
