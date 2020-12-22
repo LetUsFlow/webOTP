@@ -92,7 +92,8 @@ $username = verify()["username"];
                 data: {
                     entries: [],
                     date: new Date(),
-                    secondsToUpdate: 0
+                    secondsToUpdate: 0,
+                    refreshIconCounter: 0,
                 },
                 created() {
                     this.secondsToUpdate = (30 - this.currentSeconds()).toString();
@@ -117,8 +118,11 @@ $username = verify()["username"];
                             this.entries = JSON.parse(data);
 
                             $("#status").attr("src", "assets/img/check.svg");
+                            this.refreshIconCounter++;
                             setTimeout(() => {
-                                $("#status").css("visibility", "hidden");
+                                if (this.refreshIconCounter === 1)
+                                    $("#status").css("visibility", "hidden");
+                                this.refreshIconCounter--;
                             }, 3500);
                         });
                     },
