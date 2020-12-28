@@ -33,15 +33,13 @@ function errorexit($errorcode) {
 
 
 function checkCredentials($username, $password) {
-    $stmt = getPDO()->prepare("SELECT username, passwordhash, passwordsalt FROM `users` WHERE username=?");
+    $stmt = getPDO()->prepare("SELECT username, passwordhash FROM `users` WHERE username=?");
     $stmt->execute([$username]);
 
     if ($stmt->rowCount() != 1) return false;
 
     $res = $stmt->fetch(PDO::FETCH_ASSOC);
-    #if (!password_verify($password, $res["passwordhash"])) return false;
-    if (hash("sha3-512", $password . $res["passwordsalt"]) !== $res["passwordhash"]) return false;
-
+    if (!password_verify($password, $res["passwordhash"])) return false;
 
     return $res["username"];
 }
