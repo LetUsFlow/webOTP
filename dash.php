@@ -41,7 +41,6 @@ $username = verify()["username"];
     </head>
     <body>
 
-
         <div class="container">
             <br>
             <header>
@@ -52,7 +51,6 @@ $username = verify()["username"];
                 </div>
             </header>
             <br>
-
 
             <div id="app">
                 <table class="table">
@@ -67,8 +65,6 @@ $username = verify()["username"];
                 <p>Codes update in <span class="bold">{{ secondsToUpdate }}</span> seconds. <img id="status" src="assets/img/loading.svg" alt="status"></p>
             </div>
 
-
-
             <form action="totp/addKey.php" method="get">
                 <p><label for="issuer"></label><input type="text" id="issuer" name="issuer" placeholder="Issuer" class="form-control" required>
                 <label for="secret"></label><input type="text" id="secret" name="secret" placeholder="Secret" class="form-control" required></p>
@@ -76,13 +72,10 @@ $username = verify()["username"];
             </form>
             <form action="totp/genSecret.php" method="get" target="_blank">
                 <p><label for="newissuer"></label><input type="text" id="newissuer" name="issuer" placeholder="Issuer" class="form-control" required></p>
-                <p><button class="btn btn-lg btn-success btn-block" type="submit">Add new secret key</button></p>
-
+                <p><button class="btn btn-lg btn-success btn-block" type="submit">Generate new secret key</button></p>
             </form>
 
-
         </div>
-
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
